@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * Фильтр для исключения перелётов с общим временем на земле более 2 часов
  */
-class GroundTimeExceedsFilter implements FlightFilter {
+public class GroundTimeExceedsFilter implements FlightFilter {
     private static final long MAX_GROUND_TIME_HOURS = 2;
 
     @Override
@@ -19,7 +19,7 @@ class GroundTimeExceedsFilter implements FlightFilter {
                 .filter(flight -> {
                     List<Segment> segments = flight.getSegments();
                     if (segments.size() <= 1) {
-                        return true; // Нет пересадок - нет времени на земле
+                        return true;
                     }
 
                     long totalGroundTime = 0;

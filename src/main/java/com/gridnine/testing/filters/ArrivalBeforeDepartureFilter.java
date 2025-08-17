@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * Фильтр для исключения перелётов с сегментами, где дата прилёта раньше даты вылета
  */
-class ArrivalBeforeDepartureFilter implements FlightFilter {
+public class ArrivalBeforeDepartureFilter implements FlightFilter {
     @Override
     public List<Flight> filter(List<Flight> flights) {
         return flights.stream()

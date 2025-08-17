@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * Фильтр для исключения перелётов с вылетом до текущего момента времени
  */
-class DepartureBeforeNowFilter implements FlightFilter {
+public class DepartureBeforeNowFilter implements FlightFilter {
     @Override
     public List<Flight> filter(List<Flight> flights) {
         LocalDateTime now = LocalDateTime.now();
