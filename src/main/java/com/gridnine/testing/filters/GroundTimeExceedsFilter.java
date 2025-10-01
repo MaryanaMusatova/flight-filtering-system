@@ -11,7 +11,7 @@ import java.util.List;
  * Фильтр для исключения перелётов с общим временем на земле более 2 часов
  */
 public class GroundTimeExceedsFilter implements FlightFilter {
-    private static final long MAX_GROUND_TIME_HOURS = 2;
+    private static final long MAX_GROUND_TIME_MINUTES = 120; // 2 часа в минутах
 
     @Override
     public List<Flight> filter(List<Flight> flights) {
@@ -22,13 +22,14 @@ public class GroundTimeExceedsFilter implements FlightFilter {
                         return true;
                     }
 
-                    long totalGroundTime = 0;
+                    long totalGroundTimeMinutes = 0;
                     for (int i = 0; i < segments.size() - 1; i++) {
                         LocalDateTime arrival = segments.get(i).getArrivalDate();
                         LocalDateTime nextDeparture = segments.get(i + 1).getDepartureDate();
-                        totalGroundTime += Duration.between(arrival, nextDeparture).toHours();
 
-                        if (totalGroundTime > MAX_GROUND_TIME_HOURS) {
+                        totalGroundTimeMinutes += Duration.between(arrival, nextDeparture).toMinutes();
+
+                        if (totalGroundTimeMinutes > MAX_GROUND_TIME_MINUTES) {
                             return false;
                         }
                     }
